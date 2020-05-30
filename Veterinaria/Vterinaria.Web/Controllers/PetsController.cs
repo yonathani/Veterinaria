@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Veterinaria.Web.Models;
+using System.IO;
 
 namespace Veterinaria.Web.Controllers
 {
@@ -18,6 +19,17 @@ namespace Veterinaria.Web.Controllers
         public ActionResult Index()
         {
             return View(db.Pets.ToList());
+        }
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase file)
+        {
+            if(file!=null && file.ContentLength>0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Content/img"), fileName);
+                file.SaveAs(path);
+            }
+            return RedirectToAction("index");
         }
 
         // GET: Pets/Details/5
