@@ -14,23 +14,13 @@ namespace Veterinaria.Web.Controllers
     public class PetsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+      
         // GET: Pets
         public ActionResult Index()
         {
             return View(db.Pets.ToList());
         }
-        [HttpPost]
-        public ActionResult Index(HttpPostedFileBase file)
-        {
-            if(file!=null && file.ContentLength>0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/Content/img"), fileName);
-                file.SaveAs(path);
-            }
-            return RedirectToAction("index");
-        }
+        
 
         // GET: Pets/Details/5
         public ActionResult Details(int? id)
@@ -49,25 +39,35 @@ namespace Veterinaria.Web.Controllers
 
         // GET: Pets/Create
         public ActionResult Create()
+        
         {
             return View();
         }
+
 
         // POST: Pets/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,PetType,Age,Color,Race,Weight,Height")] Pet pet)
+        public ActionResult Create(Pet pet, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Pets.Add(pet);
-                db.SaveChanges();
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Contente/img") + fileName);
+                    file.SaveAs(path);
+
+                    
+
+                }
                 return RedirectToAction("Index");
             }
-
-            return View(pet);
+            db.Pets.Add(pet);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Pets/Edit/5

@@ -190,6 +190,10 @@
     <Compile Include="Migrations\202005210252211_UpdateDb.Designer.cs">
       <DependentUpon>202005210252211_UpdateDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005302051345_CreateProfile.cs" />
+    <Compile Include="Migrations\202005302051345_CreateProfile.Designer.cs">
+      <DependentUpon>202005302051345_CreateProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Consult.cs" />
@@ -417,6 +421,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\Perfil\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -435,6 +440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005210252211_UpdateDb.resx">
       <DependentUpon>202005210252211_UpdateDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005302051345_CreateProfile.resx">
+      <DependentUpon>202005302051345_CreateProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
